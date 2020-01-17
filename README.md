@@ -1,0 +1,2 @@
+# JYXMPPFrameWorkDemo
+后台openfire搭建服务,iOS端XMPPFramework实现客服聊天功能,MessageKit搭建聊天界面UI
