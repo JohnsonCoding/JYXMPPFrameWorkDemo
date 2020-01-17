@@ -1,9 +1,10 @@
 # JYXMPPFrameWorkDemo
 后台openfire搭建服务,iOS端XMPPFramework实现客服聊天功能,MessageKit搭建聊天界面UI
 
-## 效果图 
-###下载spark客户端可以登录对方账号进行测试
+## 下载spark客户端可以登录对方账号进行测试
 ![image](https://github.com/JohnsonCoding/JYXMPPFrameWorkDemo/blob/master/spark.png)
+
+## 效果图 (左边为spark客户端界面,右边为项目的聊天界面)
 ![JYXMPPFrameWorkDemo.gif](https://github.com/JohnsonCoding/JYXMPPFrameWorkDemo/blob/master/IM效果图.gif)
 
 ## 使用
