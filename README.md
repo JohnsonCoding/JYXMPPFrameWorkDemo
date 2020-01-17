@@ -26,7 +26,7 @@ KHostDomain,KHostName,KHostPort,KResource,KImSupport,账号(imUsername)密码(im
 (聊天UI界面借用MessageKit库,如果有需要修改样式,了解相关属性请前往查看[MessageKit](https://github.com/MessageKit/MessageKit).)~ ~
 
 ## 系统要求
-该库最低支持 `iOS 9.0`
+该库支持 `iOS 9.0`及以上
 
 ## 许可证
 LEETheme 使用 MIT 许可证，详情见 [LICENSE](LICENSE) 文件。
