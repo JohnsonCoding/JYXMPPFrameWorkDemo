@@ -8,7 +8,8 @@ Pod::Spec.new do |spec|
   spec.license      = "MIT"
   spec.author       = { "JohnsonCode" => "jiangyong0708@163.com" }
   spec.source       = { :git => "https://github.com/JohnsonCoding/JYXMPPFrameWorkDemo.git", :tag => "#{spec.version}" }
-  spec.source_files  = "JYXMPPFrameWork/**/*"
-  spec.exclude_files = "Classes/Exclude"
   spec.requires_arc = true
+  spec.dependency "XMPPFramework"
+  spec.dependency "MessageKit"
 end
+
