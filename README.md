@@ -19,11 +19,17 @@ EdlXMPPManager.shareInstance.connect()
    
 3. 需要修改成自己的参数的配置有
 ````
-KHostDomain,KHostName,KHostPort,KResource,KImSupport,账号(imUsername)密码(imPwd)
+域名    KHostDomain
+ip地址  KHostName
+端口    KHostPort
+标识    KResource
+客服账号 KImSupport
+账号    imUsername
+密码    imPwd
 ````
 
 ## 题外
-(聊天UI界面借用MessageKit库,如果有需要修改样式,了解相关属性请前往查看[MessageKit](https://github.com/MessageKit/MessageKit).)~ ~
+聊天UI界面借用MessageKit库,如果有需要修改样式,了解相关属性请前往查看[MessageKit](https://github.com/MessageKit/MessageKit)~ ~
 
 ## 系统要求
 该库支持 `iOS 9.0`及以上
