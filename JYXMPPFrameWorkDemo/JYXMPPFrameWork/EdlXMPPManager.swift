@@ -31,6 +31,10 @@ class EdlXMPPManager: NSObject {
     //数据流
     var xmppStream : XMPPStream?
     
+    //本地化存储
+    var xmppMessageArchivingCoreDataStorage: XMPPMessageArchivingCoreDataStorage!
+    var xmppMessageArchiving: XMPPMessageArchiving!
+    
     func removeSource() {
         // 移除代理
         xmppStream?.removeDelegate(self)
@@ -38,12 +42,18 @@ class EdlXMPPManager: NSObject {
         disconnect()
         // 清空资源
         xmppStream = nil
+        xmppMessageArchivingCoreDataStorage = nil
+        xmppMessageArchiving = nil
     }
     
     func setupXMPPStream() {
         //初始化
         xmppStream = XMPPStream()
         xmppStream?.addDelegate(self, delegateQueue: DispatchQueue.main)
+        // 接入消息模块，将消息存储到本地
+        xmppMessageArchivingCoreDataStorage = XMPPMessageArchivingCoreDataStorage.sharedInstance()
+        xmppMessageArchiving = XMPPMessageArchiving(messageArchivingStorage: xmppMessageArchivingCoreDataStorage, dispatchQueue: DispatchQueue.main)
+        xmppMessageArchiving.activate(xmppStream ?? XMPPStream())
     }
 
     // 连接到服务成功后，再发送密码授权

@@ -55,12 +55,35 @@ class EdlChatViewController:MessagesViewController, MessagesDataSource {
     }
     
     func loadFirstMessages() {
-        let message = EdlChatModel.init(kind: .text(welcomeMessages), user: kefuModel, messageId: kefuUUID, date: Date())
-        self.messageList = [message]
-        self.messagesCollectionView.reloadData()
-        self.messagesCollectionView.scrollToBottom()
-        
-    }
+            let storage = EdlXMPPManager.shareInstance.xmppMessageArchivingCoreDataStorage!
+            let request = NSFetchRequest<XMPPMessageArchiving_Message_CoreDataObject>(entityName: "XMPPMessageArchiving_Message_CoreDataObject")
+            let friendJID = XMPPJID(string: KImSupport)
+            request.predicate = NSPredicate(format: "bareJidStr = %@", friendJID?.bare ?? "")
+            request.sortDescriptors = [NSSortDescriptor(key: "timestamp", ascending: true)]
+            let controller = NSFetchedResultsController(fetchRequest: request, managedObjectContext: storage.mainThreadManagedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+    //        controller.delegate = self
+            try! controller.performFetch()
+            let messageRecordList = (controller.sections!.compactMap({$0.objects}).flatMap({$0}) as! [XMPPMessageArchiving_Message_CoreDataObject]).filter({$0.body != nil})
+            
+            print("======\(String(describing: messageRecordList))")
+            if messageRecordList.count == 0 {
+                let message = EdlChatModel.init(kind: .text(welcomeMessages), user: kefuModel, messageId: kefuUUID, date: Date())
+                self.messageList.insert(message, at: 0)
+            }
+            for model in messageRecordList {
+                var message : EdlChatModel!
+                if model.outgoing == 1 {
+                    message = EdlChatModel.init(kind: .text(model.body), user: selfModel, messageId: UUID().uuidString, date: model.timestamp)
+                }else{
+                    message = EdlChatModel.init(kind: .text(model.body), user: kefuModel, messageId: kefuUUID, date: model.timestamp)
+                }
+                self.messageList.append(message)
+            }
+            
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToBottom()
+            
+        }
     
     func configureMessageCollectionView() {
         

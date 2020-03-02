@@ -19,7 +19,6 @@ class ViewController: UIViewController {
     @IBAction func loginAction(_ sender: Any) {
     
         UserDefaults.standard.set(userTextField.text, forKey: "imUsername")
-        UserDefaults.standard.synchronize()
         UserDefaults.standard.set(passwordTextField.text, forKey: "imPwd")
         UserDefaults.standard.synchronize()
         
